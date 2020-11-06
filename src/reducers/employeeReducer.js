@@ -1,4 +1,4 @@
-import {ADD_EMPLOYEE, LIST_EMPLOYEES, EDIT_EMPLOYEE, DELETE_EMPLOYEE} from '../actions/types';
+import {ADD_EMPLOYEE, DELETE_EMPLOYEE, LIST_EMPLOYEES} from '../actions/types';
 
 export default (state = {}, action) => {
     switch(action.type) {
@@ -11,6 +11,15 @@ export default (state = {}, action) => {
                 newState[obj.id] = obj;
             }
             return newState;
+        case DELETE_EMPLOYEE: 
+            const nState = {...state};
+            for(let i in nState) {
+                const obj = nState[i];
+                if(obj.id === action.payload) {
+                    delete nState[obj.id];
+                }
+            }
+            return nState;
         default:
             return state;
     }
